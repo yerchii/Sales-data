@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: fct_sales
+    description: "Факт продаж"
+    columns:
+      - name: "reference_id"
+        description: "Уникальный идентификатор транзакции"
+        tests:
+          - not_null
+          - unique
+
+      - name: "country"
+        description: "Страна"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['AU','BB','BM','BS','CA','CR','EG','GB','GF','IL','MT','NZ','PA','PG','PR','SG','UA','US','ZA']
+
+      - name: "source"
+        description: "Канал привлечения"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['N/A','From Support','Chat','Call','Ticket']
+
+      - name: "revenue_total"
+        description: "Сумма продажи"
+        tests:
+          - not_null
+          - revenue_total_nonnegative
